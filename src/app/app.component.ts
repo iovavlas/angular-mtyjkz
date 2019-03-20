@@ -29,7 +29,7 @@ import { Component } from '@angular/core';
           <input type="text"  [value]=eventInputText  
             (input)="handleInput($event)" placeholder="Input field">
           <div> You entered: {{eventInputText}} </div>
-          <button (click)="handleClick()"> Delete </button>
+          <button (click)="handleClickDelete()"> Delete </button>
         </div> 
       </div>`,
   styleUrls: [ './app.component.css' ]  // CSS-file for this Component  
@@ -51,7 +51,7 @@ export class AppComponent  {
     this.eventInputText = event.target.value;
   }
 
-  handleClick() :void {
+  handleClickDelete() :void {
     this.eventInputText = '';
   }
 }
