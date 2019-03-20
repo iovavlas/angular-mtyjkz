@@ -3,10 +3,10 @@
 	<p> Hello... {{ title }} !</p>
 	<div>
 		<h2> - Interpolation & expressions - </h2>
-		{{ Num1 + Num2 + '!' }} {{ isHappy ? ';)' : ':(' }}
+		{{ Num1 + 2 + '!' }} {{ isHappy ? ';)' : ':(' }}
 	</div>
 	<div>
-		<h2> - Property (One way) binding - </h2>
+		<h2> - Property (One way) binding: [Component => Template] - </h2>
 		<span> {{ title }} </span> 
     <span [innerHTML]="title"> </span> 
     <div>
@@ -16,10 +16,43 @@
     </div>
   </div>
   <div>
-    <h2> - Event binding - </h2> 
+    <h2> - Event binding: [Template => Component] - </h2> 
     <input type="text"  [value]=eventInputText  
-           (input)="handleInput($event)" placeholder="Input field">
+           (input)="handleInput($event)" placeholder="Input field"
+           (focus)="this.eventInputText=''">
     <div> You entered: {{eventInputText}} </div>
-    <button (click)="handleClickDelete()"> Delete </button>
+    <button (click)="handleClickDelete()"> Delete Input </button>
   </div> 
+  <div>
+    <h2> - Two way binding (Read & Write) - </h2> 
+    <input type="text"  [ngModel]=inputText2  
+           (ngModelChange)="handleChange($event)" placeholder="Input field"
+           (focus)="this.inputText2=''">
+    <div> You entered: {{inputText2}} </div> 
+    <input type="text"  [(ngModel)]=inputText3  
+            placeholder="Input field"   (focus)="this.inputText3=''">
+    <div> You entered: {{inputText3}} </div>
+  </div> 
+  <div>
+    <h2> - Template #ref variables (Reference to a DOM-Node) - </h2> 
+    <input type="text"  #username  value=""> 
+    <div> You entered: {{inputText4}} </div> 
+    <button (click)="handleClickGet(username.value)"> Get Input </button>
+  </div> 
+  <div> 
+    <h2> - ngIf (Directive) - </h2>
+    <input type="text"  [value]="inputText2"  placeholder="Search"  
+          (input)="handleChange($event.target.value)">
+    <div *ngIf="inputText2.length > 2"> Searching for... {{inputText2}} </div> 
+  </div>
+  <div> 
+    <h2> - ngFor (Directive) - </h2>
+    <div> Passengers list... </div>
+    <ul>
+      <li *ngFor="let person of passengers; let i = index">    <!-- "For of" Loop --> 
+        #{{ i + 1 }} : id = {{ person.id }} , Name = {{ person.fullname }}
+      </li>
+    </ul>
+  </div>
 </div>
+ 
